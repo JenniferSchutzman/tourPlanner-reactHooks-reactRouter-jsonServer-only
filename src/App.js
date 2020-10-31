@@ -4,12 +4,16 @@ import './App.css';
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
+import ExperienceTypes from './pages/experienceTypes'
 import Home from './pages/home'
 import Interests from './pages/interests'
 import Recommendations from './pages/recommendations'
 import AllTours from './pages/allTours'
 
 class App extends Component {
+  // let { interest } = useParams()
+
+
   render() {
     return (
       <BrowserRouter>
@@ -17,6 +21,7 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/interests" component={Interests} />
+            <Route exact path="/:interest" component={ExperienceTypes} />
             <Route exact path="/recommendations" component={Recommendations} />
             <Route exact path="/allTours" component={AllTours} />
           </Switch>
