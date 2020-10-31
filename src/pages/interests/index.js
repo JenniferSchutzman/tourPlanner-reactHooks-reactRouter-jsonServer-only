@@ -17,16 +17,25 @@ const Interests = props => {
 
   useEffect(() => {
     getInterests()
+    getAllTours()
   }, [])
 
   const getInterests = async () => {
-    const data = await get('/interests')
-    if (response.ok) setData(data)
+    const res = await get('/interests')
+    if (response.ok) setInterests(res)
   }
 
-  const passInterestToAdventure = (item) => {
+  const getAllTours = async () => {
+    const tours = await get('/allTours')
+    if (response.ok) setData(tours)
+  }
+
+  const passInterestToExperiences = (item) => {
     // console.log('item.name', item.title)
-    history.push(`/${item.title}`)
+    history.push({
+      pathname: `/${item.title}`,
+      state: data
+    })
   }
 
   // const getAllTours = async () => {
@@ -48,9 +57,9 @@ const Interests = props => {
             </Typography>
           </GridListTile>
 
-          {data.map((item) => (
+          {interests.map((item) => (
             <ButtonBase
-              onClick={() => passInterestToAdventure(item)}
+              onClick={() => passInterestToExperiences(item)}
               focusRipple
               key={item.title}
               className={classes.image}
