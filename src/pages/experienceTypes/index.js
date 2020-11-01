@@ -5,44 +5,7 @@ import { ButtonBase, GridList, GridListTile, Typography } from '@material-ui/cor
 
 import useStyles from './experienceTypesUseStyles.js'
 
-////////// PRACTICE ///////////// Come back to this another day 
-
-// const data = [
-//   {
-//     _id: 'an id name',
-//     tourName: "daytime history tour",
-//     companyName: "Palmetto Carriage",
-//     type: "carriage",
-//     options: ["history", "carriage"]
-//   },
-//   {
-//     _id: 'second id name',
-//     tourName: 'second tour name',
-//     companyName: 'second tour na,e',
-//     type: "carriage",
-//     options: ["history", "carriage"]
-//   },
-//   {
-//     _id: 'third id name',
-//     tourName: 'third tour name',
-//     companyName: 'third tour na,e',
-//     type: "boat",
-//     options: ["adventure", "boat"]
-//   }
-// ]
-
-// map to display the types but do not repeat a type (keeping the objects)
-
-// const unique = data.map(item => item.type).map(id => {
-//   console.log('id', id)
-//   console.log('item', item)
-//   // if()
-//   return {
-//     type: data.find(item => item._id === id).type,
-//     companyName: data.find(item => item._id === id).companyName
-//   }
-// }))
-// console.log('unique', unique)
+import dataByInterest from './dataByInterest'
 
 const ExperienceTypes = () => {
 
@@ -54,40 +17,27 @@ const ExperienceTypes = () => {
   const classes = useStyles();
 
   useEffect(() => {
-    setData(location.state)
-    getExperienceTypes(location.state)
-  }, [])
+    // setData(location.state)
+    getExperienceTypes()
+  }, [interest])
 
+  // console.log(dataByInterest)
 
-
-  const getExperienceTypes = tours => {
-    //   const filteredToursForInterest = R.filter(R.where({ options: R.includes(R.toLower(interest)) }), tours)
-    // change this another day to remove duplicate types
-    setExperiences(tours)
+  const getExperienceTypes = () => {
+    const isType = item => item.name === interest
+    // console.log('interest in params to compare again data', interest)
+    const filteredData = R.filter(isType, dataByInterest)
+    const experienceData = filteredData.map(item => item.experienceTypes)
+    console.log('experienceData', experienceData)
   }
 
   const handleClick = (item) => {
     const experienceType = 'walking'
-    //  will eventaully select the correct experienceType selected int he item object
     history.push({
       pathname: `/${interest}/${experienceType}/schedule`,
       state: data
     })
-
-    // const newLocation = {
-    //   pathname: `/schedule`,
-    //   // another day I will be show to only pass on the experiences matching the one clicked 
-    //   // AND the interest frmo  the param on this page 
-    //   state: { experiences }
-    // }
-    // history.push(newLocation)
   }
-
-  console.log('data', data)
-  console.log('interest', interest)
-  console.log('experienceType', experienceType)
-  console.log('location.state', location.state)
-  console.log('location.pathname', location.pathname)
   return (
     <div>
 
