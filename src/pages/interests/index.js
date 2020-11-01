@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom';
 import useFetch from 'use-http'
-import { ButtonBase, GridList, GridListTile, ListSubheader, Typography } from '@material-ui/core';
-import StarBorderIcon from '@material-ui/icons/StarBorder';
+import { ButtonBase, GridList, GridListTile, Typography } from '@material-ui/core';
 
 import useStyles from './interestsUseStyles'
 
 const Interests = props => {
 
-  const classes = useStyles();
+
   const [data, setData] = useState([])
   const [interests, setInterests] = useState([])
   const { get, response, loading, error } = useFetch('http://localhost:3001')
   let history = useHistory();
+  const classes = useStyles();
   // let { experienceType } = useParams();
 
   useEffect(() => {
@@ -30,7 +30,7 @@ const Interests = props => {
     if (response.ok) setData(tours)
   }
 
-  const passInterestToExperiences = (item) => {
+  const handleClick = (item) => {
     // console.log('item.name', item.title)
     history.push({
       pathname: `/${item.title}`,
@@ -43,7 +43,8 @@ const Interests = props => {
   //   if (response.ok) setData(data)
   // }
 
-  console.log('data', data)
+  // console.log('data', data)
+  console.log('history in interests', history)
 
   // console.log('interests', interests)
 
@@ -59,7 +60,7 @@ const Interests = props => {
 
           {interests.map((item) => (
             <ButtonBase
-              onClick={() => passInterestToExperiences(item)}
+              onClick={() => handleClick(item)}
               focusRipple
               key={item.title}
               className={classes.image}
