@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import useFetch from 'use-http'
 import { ButtonBase, GridList, GridListTile, Typography } from '@material-ui/core';
 
@@ -31,7 +31,6 @@ const Interests = props => {
   }
 
   const handleClick = (item) => {
-    // console.log('item.name', item.title)
     history.push({
       pathname: `/${item.title}`,
       state: data

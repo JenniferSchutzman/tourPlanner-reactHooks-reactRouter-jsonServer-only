@@ -50,7 +50,7 @@ const ExperienceTypes = () => {
   const [experiences, setExperiences] = useState([])
   const history = useHistory();
   const location = useLocation();
-  let { interest } = useParams()
+  let { interest, experienceType } = useParams()
   const classes = useStyles();
 
   useEffect(() => {
@@ -58,11 +58,7 @@ const ExperienceTypes = () => {
     getExperienceTypes(location.state)
   }, [])
 
-  // useEffect(() => {
-  //   if (history.location.pathname === "/schedule") {
-  //     history.push('/schedule')
-  //   }
-  // }, [location])
+
 
   const getExperienceTypes = tours => {
     //   const filteredToursForInterest = R.filter(R.where({ options: R.includes(R.toLower(interest)) }), tours)
@@ -70,30 +66,28 @@ const ExperienceTypes = () => {
     setExperiences(tours)
   }
 
-  const handleClick = () => {
-    console.log('inside handleClick', location.pathname)
+  const handleClick = (item) => {
+    const experienceType = 'walking'
+    //  will eventaully select the correct experienceType selected int he item object
+    history.push({
+      pathname: `/${interest}/${experienceType}/schedule`,
+      state: data
+    })
+
     // const newLocation = {
     //   pathname: `/schedule`,
     //   // another day I will be show to only pass on the experiences matching the one clicked 
-    //   // AND the interest frmo the param on this page 
+    //   // AND the interest frmo  the param on this page 
     //   state: { experiences }
     // }
-    return (
-      <Link to={{
-        pathname: "/interests",
-        // another day I will be show to only pass on the experiences matching the one clicked 
-        // AND the interest frmo the param on this page 
-        state: experiences
-      }} />
-    )
     // history.push(newLocation)
   }
 
-  console.log('render location.pathname', location.pathname)
-
-
-  // console.log('experiences', experiences)
-
+  console.log('data', data)
+  console.log('interest', interest)
+  console.log('experienceType', experienceType)
+  console.log('location.state', location.state)
+  console.log('location.pathname', location.pathname)
   return (
     <div>
 
@@ -110,7 +104,7 @@ const ExperienceTypes = () => {
             <ButtonBase
               focusRipple
               key={item.tourName}
-              onClick={() => handleClick(history, item)}
+              onClick={() => handleClick(item)}
               className={classes.image}
             >
               <h1>{item.type}</h1>

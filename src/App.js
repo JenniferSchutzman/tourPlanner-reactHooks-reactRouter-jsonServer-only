@@ -21,14 +21,13 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/interests" component={Interests} />
-            <Route exact path="/:interest" component={ExperienceTypes}>
-              <Route exact path="/schedule" component={Schedule} />
-            </Route>
+            <Route exact path="/:interest" component={ExperienceTypes} />
+            <Route path="/:interest/:experienceType/schedule" component={Schedule} />
             <Route exact path="/recommendations" component={Recommendations} />
             <Route exact path="/allTours" component={AllTours} />
           </Switch>
         </div>
-      </BrowserRouter>
+      </BrowserRouter >
     );
   }
 
