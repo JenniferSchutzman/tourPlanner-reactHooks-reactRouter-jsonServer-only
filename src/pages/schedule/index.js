@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
-import history from '../../history'
+// import history from '../../history'
 
 import useStyles from './scheduleUseStyles'
 
 const Schedule = () => {
-  const [data, setData] = useState([])
+  // const [data, setData] = useState([])
   const location = useLocation();
-  // const history = useHistory();
+  const history = useHistory();
 
   const classes = useStyles();
 

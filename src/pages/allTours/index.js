@@ -1,7 +1,7 @@
-import React, { useState, useParams, useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 const AllTours = (props) => {
-  const [allTours, setAllTours] = useState([]);
+  // const [allTours, setAllTours] = useState([]);
 
   useEffect(() => {
     fetch('http://localhost:3001/allTours')

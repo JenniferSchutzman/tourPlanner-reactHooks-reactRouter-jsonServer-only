@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useHistory, Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import useFetch from 'use-http'
 import { ButtonBase, GridList, GridListTile, Typography } from '@material-ui/core';
 
@@ -10,7 +10,7 @@ const Interests = props => {
 
   const [data, setData] = useState([])
   const [interests, setInterests] = useState([])
-  const { get, response, loading, error } = useFetch('http://localhost:3001')
+  const { get, response } = useFetch('http://localhost:3001')
   let history = useHistory();
   const classes = useStyles();
   // let { experienceType } = useParams();
@@ -36,16 +36,6 @@ const Interests = props => {
       state: data
     })
   }
-
-  // const getAllTours = async () => {
-  //   const data = await get('/allTours')
-  //   if (response.ok) setData(data)
-  // }
-
-  // console.log('data', data)
-  console.log('history in interests', history)
-
-  // console.log('interests', interests)
 
   return (
     <div className={classes.root}>
