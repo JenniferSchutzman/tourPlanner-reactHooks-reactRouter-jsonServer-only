@@ -26,16 +26,12 @@ const ExperienceTypes = () => {
     const filteredData = R.filter(isType, dataByInterest)
     const types = (filteredData.map(item => item.experienceTypes))
     setExperiences(R.flatten(types))
-    // console.log('types', types)
-    // console.log('names', types.map(item => item.name))
-
   }
 
   const handleClick = (item) => {
-    const experienceType = 'walking'
+    const experienceType = item.name
     history.push({
       pathname: `/${interest}/${experienceType}/schedule`,
-      // state: data
     })
   }
 
