@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory, useLocation, Link } from 'react-router-dom';
+import { useHistory, useLocation, useParams, Link } from 'react-router-dom';
 import { Card, CardMedia, ListItem, ListItemIcon, ListItemText, Switch, Typography } from '@material-ui/core'
 import Button from '@material-ui/core/Button';
 import TodayIcon from '@material-ui/icons/Today';
@@ -10,55 +10,56 @@ import dataForDOW from './dataForDOW';
 const Schedule = () => {
 
   const [data, setData] = useState([])
-  // const [isChecked, setIsChecked] = useState({
-  //   Monday: false,
-  //   Tuesday: false,
-  //   Tednesday: false,
-  //   Thursday: false,
-  //   Friday: false,
-  //   Saturday: false,
-  //   Sunday: false
-
-  // });
-  const location = useLocation();
+  // const location = useLocation();
   const history = useHistory();
   const classes = useStyles();
+  const { interest, experienceType } = useParams()
 
-  // console.log('isChecked', isChecked)
+
 
   useEffect(() => {
     setData(dataForDOW)
   }, [dataForDOW])
 
   const checkDay = (event) => {
-
     const newDow = data.map(day => {
-      console.log('day', day)
       if (day.name === event.target.name && day.selected === true) {
-        console.log('inside first if', day)
         return { name: day.name, selected: false }
       } else if (day.name === event.target.name && (day.selected === null || day.selected === false)) {
-        console.log('inside seoncd if', day)
         return { name: day.name, selected: true }
       } else {
         return day
       }
     })
-    console.log('newDow', newDow)
     setData(newDow)
-
-    // first handle the already true
-    // console.log('data', data)
-    // const checkFalse = data.map(day => (day.name === event.target.name && day.selected === true) ? { name: day.name, selected: false } : day)
-    // console.log('checkFalse', checkFalse)
-
-    // const newDow = checkFalse.map(day => (day.name === event.target.name && (day.selected === null || day.selected === false)) ? { name: day.name, selected: true } : day)
-    // console.log('newDow', newDow)
-    // setData(newDow)
-
-    // I will also push in the interest and epxerience in order to run the 
-    // recommendations filter onSubmit 
   }
+
+  const handleSubmit = () => {
+    // console.log('interest', interest)
+    // console.log('experienceType', experienceType)
+    // console.log('data', data)
+    const selectedDays = R.compose(
+      R.map(item => item.name),
+      R.filter(day => day.selected === true)
+    )(data)
+
+    // data.filter(day => day.selected === true)
+    console.log('selectedDays', selectedDays)
+
+    // i will push al of these items into an array
+    const params = [];
+    params.push(interest, experienceType)
+    const finalTags = selectedDays.concat(params)
+    console.log('finalTags', finalTags)
+    if (finalTags) {
+      history.push({
+        pathname: '/recommendations',
+        state: finalTags
+      })
+    }
+    // and then pass this state to the recommendations page where I will compare against the GET ALL
+  }
+
 
   // console.log('data', data)
   return (
@@ -94,19 +95,16 @@ const Schedule = () => {
                   />
                 </ListItem>
               ))}
-            </div>
 
-            <Link to="/recommendations" style={{ textDecoration: 'none' }}>
               <Button
-                variant="raised"
                 size="large"
                 color="grey"
                 className={classes.button}
-                onClick={console.log('')}
+                onClick={handleSubmit}
               >
                 Ready for Results
               </Button>
-            </Link>
+            </div>
 
           </center>
         </div>

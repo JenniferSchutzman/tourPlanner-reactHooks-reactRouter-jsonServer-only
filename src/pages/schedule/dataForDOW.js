@@ -1,11 +1,11 @@
 const dataForDOW = [
-  { name: 'Monday', selected: true },
-  { name: 'Tuesday', selected: null },
-  { name: 'Wednesday', selected: null },
-  { name: 'Thursday', selected: null },
-  { name: 'Friday', selected: null },
-  { name: 'Saturday', selected: null },
-  { name: 'Sunday', selected: null }
+  { name: 'Monday', selected: false },
+  { name: 'Tuesday', selected: false },
+  { name: 'Wednesday', selected: false },
+  { name: 'Thursday', selected: false },
+  { name: 'Friday', selected: false },
+  { name: 'Saturday', selected: false },
+  { name: 'Sunday', selected: false }
 ]
 
 export default dataForDOW;
