@@ -32,7 +32,7 @@ const Interests = props => {
 
   const handleClick = (item) => {
     history.push({
-      pathname: `/${item.title}`,
+      pathname: `/selections/${item.title}`,
       state: data
     })
   }

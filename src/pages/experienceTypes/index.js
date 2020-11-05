@@ -31,7 +31,7 @@ const ExperienceTypes = () => {
   const handleClick = (item) => {
     const experienceType = item.name
     history.push({
-      pathname: `/${interest}/${experienceType}/schedule`,
+      pathname: `/selections/${interest}/${experienceType}/schedule`,
     })
   }
 
