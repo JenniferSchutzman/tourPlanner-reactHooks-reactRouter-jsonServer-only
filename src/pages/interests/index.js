@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom';
 import useFetch from 'use-http'
+import * as R from 'ramda'
 import { ButtonBase, GridList, GridListTile, Typography } from '@material-ui/core';
 
 import useStyles from './interestsUseStyles'
@@ -30,11 +31,26 @@ const Interests = props => {
     if (response.ok) setData(tours)
   }
 
-  const handleClick = (item) => {
-    history.push({
-      pathname: `/selections/${item.title}`,
-      state: data
-    })
+  const handleClick = (interestSelected) => {
+    // first sort through data for interests matching onle
+    console.log('interestSelected', interestSelected)
+    console.log('data', data)
+    let newData = []
+    data.map(tour => {
+      if (tour.options.includes(interestSelected.title.toLowerCase())) {
+        newData.push(tour)
+      }
+      return tour
+    }
+    )
+    // setData(newData)
+    // data.map(tour => (tour.options.includes(interestSelected.title.toLowerCase())) ? tour : null)
+    console.log('newData', newData)
+    // console.log('dataafter', data)
+    // history.push({
+    //   pathname: `/selections/${item.title}`,
+    //   state: data
+    // })
   }
 
   return (
@@ -42,7 +58,7 @@ const Interests = props => {
       <center>
         <GridList cellHeight={180} className={classes.gridList}>
           <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
-            <Typography variant="display1" gutterBottom>
+            <Typography gutterBottom>
               What Interests You?
             </Typography>
           </GridListTile>
@@ -65,7 +81,6 @@ const Interests = props => {
               <span className={classes.imageButton}>
                 <Typography
                   component="span"
-                  variant="subheading"
                   color="inherit"
                   className={classes.imageTitle}
                 >

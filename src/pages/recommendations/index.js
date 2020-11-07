@@ -16,39 +16,38 @@ const Recommendations = () => {
       .then(data => setAllTours(data))
   }, [])
 
-  useEffect(() => {
-    getRecommendations()
-  }, [allTours])
+  // useEffect(() => {
+  //   getRecommendations()
+  // }, [allTours])
 
   const tags = location.state
 
-  const getRecommendations = () => {
+  // const getRecommendations = () => {
 
-    // const hasMatch = (value) => value.con
+  // const hasMatch = (value) => value.con
 
-    // const checkMatches = (array, target) => target.every(value => array.includes(value))
+  // const checkMatches = (array, target) => target.every(value => array.includes(value))
 
-    // const list = allTours.filter(tour => checkMatches(tags, tour.options))
+  // const list = allTours.filter(tour => checkMatches(tags, tour.options))
 
-    // const list = diff()
+  // const list = diff()
 
-    c      var resultOptions = []
+  // RUN A PREDICATE COMPARISON.  IF ALL TRUE THEN RETURN THE OBJECT
 
-    console.log(
-      'action.payload.interests',
-      JSON.stringify(action.payload.interests)
-    )
-    const chosenInterest = find(i => i.selected, action.payload.interests)
-    //console.log('chosenInterests', JSON.stringify(chosenInterest))
-    const resultOptions1 = concat([chosenInterest.name], resultOptions)
-    //console.log('resultOptions1', JSON.stringify(resultOptions1))
-    const chosenExp = find(e => e.selected, chosenInterest.experienceTypes)
-    const resultOptions2 = concat([chosenExp.name], resultOptions1)
-    const chosenDays = find(d => d.selected, action.payload.dow)
-    const resultOptionsFINAL = concat([chosenDays.name], resultOptions2)
-    return (state = resultOptionsFINAL)
-    console.log('list', list)
-  }
+
+
+  // c      var resultOptions = []
+  //   const chosenInterest = R.find(i => i.selected, action.payload.interests)
+  //   //console.log('chosenInterests', JSON.stringify(chosenInterest))
+  //   const resultOptions1 = concat([chosenInterest.name], resultOptions)
+  //   //console.log('resultOptions1', JSON.stringify(resultOptions1))
+  //   const chosenExp = find(e => e.selected, chosenInterest.experienceTypes)
+  //   const resultOptions2 = concat([chosenExp.name], resultOptions1)
+  //   const chosenDays = find(d => d.selected, action.payload.dow)
+  //   const resultOptionsFINAL = concat([chosenDays.name], resultOptions2)
+  //   return (state = resultOptionsFINAL)
+  //   console.log('list', list)
+  // }
 
   return (
     <h1>Recommendations page</h1>
